@@ -1,0 +1,117 @@
+.PlayBoardContainer {
+  min-width: 600px;
+  width: 100%;
+  height: 100%;
+
+  min-width: 700px;
+  flex: 1;
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  margin: 0px 10px;
+}
+
+.playBoardWrapper {
+  width: 675px;
+  height: 675px;
+  box-sizing: border-box;
+
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.25);
+
+  border-radius: 15px;
+  background-color: rgb(242, 211, 131);
+
+  z-index: 100;
+}
+
+.playBoardBack {
+  z-index: 10;
+  position: absolute;
+  top: 0%;
+  left: 0%;
+
+  width: 675px;
+  height: 675px;
+
+  display: grid;
+  grid-template-columns: repeat(15, 45px);
+  grid-template-rows: repeat(15, 45px);
+}
+
+.playBoardBack_cell {
+  box-sizing: border-box;
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.playBoardBack_cell_point {
+  width: 100%;
+  height: 100%;
+
+  transition: transform 1s;
+
+  display: flex;
+
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  box-sizing: border-box;
+
+  border-radius: 50%;
+}
+
+.playBoardBack_cell_point:hover {
+  animation: pointAnimation 3s infinite linear;
+  border: 1px dashed red;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.playBoardFront {
+  /* border: 1px solid #fdfdfd; */
+  border: 1px solid #000;
+
+  width: 630px;
+  height: 630px;
+
+  display: grid;
+  grid-template-columns: repeat(14, 45px);
+  grid-template-rows: repeat(14, 45px);
+}
+
+.playBoardFront_cell {
+  /* border: 1px solid #fdfdfd; */
+  border: 1px solid #000;
+  box-sizing: border-box;
+  position: relative;
+}
+
+@keyframes pointAnimation {
+  0% {
+    transform: scale(1.1) rotate(0deg);
+  }
+
+  50% {
+    transform: scale(1.5) rotate(180deg);
+  }
+
+  100% {
+    transform: scale(1.1) rotate(360deg);
+  }
+}

@@ -1,0 +1,67 @@
+.statusContainer {
+  flex: 1;
+  height: 100%;
+  width: 100%;
+  border-radius: 0px 15px 15px 0px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.statusWrapper {
+  padding-right: 150px;
+  display: flex;
+  height: 100px;
+  padding-top: 50px;
+  padding-bottom: 15px;
+}
+
+.titleWrapper {
+  color: #001661;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+}
+
+.titleWrapper h1 {
+  font-size: 32px;
+  margin: 0;
+}
+
+.titleWrapper p {
+  font-size: 14px;
+  margin: 0;
+}
+
+.scoreWrapper {
+  margin-bottom: 70px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.scoreGraph {
+  width: 500px;
+  height: 300px;
+}
+
+.score {
+  text-align: center;
+  font-size: 32px;
+  color: #001661;
+}
+
+.buttonWrapper {
+  padding-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

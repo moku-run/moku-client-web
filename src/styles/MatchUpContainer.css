@@ -1,0 +1,14 @@
+.matchUpContainer {
+  background-color: #fdfdfd;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+
+  border-radius: 15px;
+
+  width: 100%;
+  padding: 10px 0px;
+  box-shadow: 4px 4px 4px rgb(0, 0, 0, 0.3);
+}

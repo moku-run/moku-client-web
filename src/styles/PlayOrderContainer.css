@@ -1,0 +1,28 @@
+.playOrderContainer {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 50px;
+  padding-left: 25px;
+  box-sizing: border-box;
+  padding-bottom: 40px;
+}
+
+.PlayButtonWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  box-sizing: border-box;
+
+  padding: 50px 15px 0px 15px;
+  width: 200px;
+}
+
+.playOrderLogo {
+  padding-bottom: 50px;
+  width: 250px;
+}

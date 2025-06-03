@@ -1,0 +1,50 @@
+.signUpContainer {
+  flex: 1;
+  height: 100%;
+  width: 100%;
+  border-radius: 0px 15px 15px 0px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.signUpWrapper {
+  height: 80%;
+
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  justify-content: space-evenly;
+}
+
+.titleWrapper {
+  color: #001661;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+}
+
+.titleWrapper h1 {
+  font-size: 32px;
+  margin: 0;
+}
+
+.titleWrapper p {
+  font-size: 14px;
+  margin: 0;
+}
+
+.inputWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.buttonWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}

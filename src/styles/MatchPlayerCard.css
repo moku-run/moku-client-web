@@ -1,0 +1,73 @@
+.matchPlayerCard {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.turnWrapper {
+  padding: 0px 15px;
+  color: #999999;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.matchTurn {
+  color: #fe6941;
+}
+
+.playerImgWrapper {
+  border: 3px solid #fe6941;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.playerImg {
+  position: relative;
+  top: 5%;
+  width: 70px;
+  height: 70px;
+}
+
+.recordWrapper {
+  padding: 0px 10px;
+  flex: 1;
+  color: #999999;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.matchNickname {
+  color: #001661;
+  font-size: 17px;
+}
+
+.matchRecord {
+  color: #fe6941;
+  font-size: 17px;
+}
+
+.matchRate {
+  color: #409d95;
+  font-size: 14px;
+}
+
+.notMatchTurn {
+  color: #999999;
+}
+
+.notMatchTurnImg {
+  border: 3px solid #999999;
+}

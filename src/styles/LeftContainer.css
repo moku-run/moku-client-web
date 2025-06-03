@@ -1,0 +1,24 @@
+.leftContainer {
+  flex: 1;
+  height: 100%;
+  border-radius: 15px;
+
+  background-color: #56d4c9;
+  box-shadow: 5px 5px 5px rgb(0, 0, 0, 0.3);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo {
+  flex: 1;
+  max-width: 354px;
+  max-height: 531px;
+}
+
+.copyRight {
+  padding-top: 195px;
+  font-weight: 400;
+  color: #ffffff;
+}

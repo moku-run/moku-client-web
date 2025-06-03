@@ -1,0 +1,38 @@
+.underBarWrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.underBarLink {
+  padding: 5px 0px 5px 0px;
+
+  white-space: nowrap;
+  font-size: 14px;
+  text-align: center;
+  width: fit-content;
+  justify-content: center;
+  cursor: pointer;
+
+  border: none;
+  background-color: transparent;
+}
+
+.PRIMARY_LINK {
+  color: rgba(254, 105, 65, 1);
+  border-bottom: 1px solid rgba(254, 105, 65, 0.8);
+}
+
+.SECONDARY_LINK {
+  color: rgba(0, 22, 97, 1);
+  border-bottom: 1px solid rgba(0, 22, 97, 0.8);
+}
+
+.PRIMARY_LINK:hover {
+  color: rgba(0, 22, 97, 1);
+  border-bottom: 1px solid rgba(0, 22, 97, 0.8);
+}
+
+.SECONDARY_LINK:hover {
+  color: rgba(254, 105, 65, 1);
+  border-bottom: 1px solid rgba(254, 105, 65, 0.8);
+}

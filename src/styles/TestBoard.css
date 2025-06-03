@@ -1,0 +1,52 @@
+.boardWrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin: auto;
+  height: 100vh;
+  box-sizing: border-box;
+}
+
+.boardGrid {
+  display: grid;
+  grid-template-columns: repeat(15, 40px);
+  grid-template-rows: repeat(15, 40px);
+  border: 1px solid #333;
+  position: relative;
+  z-index: 1;
+
+  border: 1px solid red;
+}
+
+.black {
+  background-color: black;
+}
+
+.white {
+  background-color: white;
+  border: 1px solid black;
+}
+
+.xLabels,
+.yLabels {
+  position: absolute;
+  font-weight: bold;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.xLabels {
+  display: grid;
+  grid-template-columns: repeat(15, 40px);
+  top: -25px;
+  left: 40px;
+}
+
+.yLabels {
+  display: grid;
+  grid-template-rows: repeat(15, 40px);
+  top: 0;
+  left: -25px;
+}

@@ -1,0 +1,50 @@
+.underBarInput {
+  border: none;
+
+  width: 95%;
+  padding: 5px 5px 5px 0px;
+}
+
+.underBarInput::placeholder {
+  font-size: 14px;
+}
+
+.OUTLINE_NONE:focus {
+  outline: none;
+}
+
+.PRIMARY_INPUT {
+  padding-left: 5px;
+  border-bottom: 1px solid #001661;
+}
+
+.PRIMARY_INPUT:focus {
+  border-bottom: 1px solid rgba(254, 105, 65, 0.8);
+}
+
+.PRIMARY_INPUT::placeholder {
+  color: rgba(254, 105, 65, 0.8);
+}
+
+.SECONDARY_INPUT {
+  border-bottom: 1px solid rgba(0, 22, 97, 0.8);
+}
+
+.SECONDARY_INPUT::placeholder {
+  color: rgba(0, 22, 97, 0.8);
+}
+
+.SECONDARY_INPUT:focus {
+  border-bottom: 1px solid rgba(254, 105, 65, 0.8);
+}
+
+.underBarInputWrapper {
+  /* border: 1px solid #000; */
+}
+
+.underBarInputTitle {
+  color: #001661;
+  font-size: 17px;
+  padding: 0px 0px 10px 0px;
+  /* border: 1px solid #000; */
+}
