@@ -6,6 +6,7 @@ import { Client } from "@stomp/stompjs";
 import SockJS from "sockjs-client";
 import { HTTP_API } from "../service/Api";
 import { useUserStore } from "../hooks/userStore";
+import { toast } from "react-toastify";
 
 const tips = [
   "[TIP] 3x3, 4x4는 허용되고 있어요.",
@@ -62,11 +63,11 @@ const MatchingContainer = ({ cancle, setJoin, setMatching }) => {
           localStorage.setItem("stone", matchingResult.stone);
 
           if (matchingResult.stone === "BLACK_STONE") {
-            alert("흑돌입니다! 선공하세요!");
+            toast.dark("흑돌입니다! 선공하세요!");
           }
 
           if (matchingResult.stone === "WHITE_STONE") {
-            alert("백돌입니다! 후공입니다!");
+            toast.info("백돌입니다! 후공입니다!");
           }
 
           setTimeout(() => {

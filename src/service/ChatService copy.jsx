@@ -18,10 +18,6 @@ const ChatService = () => {
       heartbeatIncoming: 4000,
       heartbeatOutgoing: 4000,
       onConnect: () => {
-
-        
-        alert("onCONNECT!!! ");
-
         // 연결 성공 시 구독 설정
         client.current.subscribe("/topic/reply", (message) => {
           const receivedMessage = JSON.parse(message.body);

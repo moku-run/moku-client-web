@@ -5,8 +5,8 @@ import UnderBarInput from "../components/UnderBarInput";
 import { useState } from "react";
 import SignUpContainer from "./SignUpContainer";
 import { get, post } from "../service/FetchService";
-// import { create } from "zustand";
 import { useUserStore } from "../hooks/userStore";
+import { toast } from "react-toastify";
 
 const LoginContainer = ({ matchSubmit, link, loginSubmit }) => {
   const [loginDTO, setLoginDTO] = useState({
@@ -23,12 +23,12 @@ const LoginContainer = ({ matchSubmit, link, loginSubmit }) => {
 
   const loginSubmit2 = async () => {
     if (loginDTO.login_id === "") {
-      alert("아이디는 필수입니다.");
+      toast.error("아이디는 필수입니다.");
       return;
     }
 
     if (loginDTO.password === "") {
-      alert("비밀번호는 필수입니다.");
+      toast.error("비밀번호는 필수입니다.");
       return;
     }
 
@@ -42,7 +42,7 @@ const LoginContainer = ({ matchSubmit, link, loginSubmit }) => {
 
       setUser({ nickname: nickname, login_id: loginId });
 
-      alert("로그인에 성공했습니다.");
+      toast.success("로그인에 성공했습니다.");
       loginSubmit();
     }
   };
