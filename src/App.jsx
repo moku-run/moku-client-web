@@ -8,6 +8,8 @@ import SockJS from "sockjs-client";
 import { HTTP_API, WS_API, PLAY_CHANNEL } from "./service/Api";
 import { useOnConnect } from "./service/ChatService";
 import { useUserStore } from "./hooks/userStore";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const MATCH_STATE = {
   READY: "READY",
@@ -54,6 +56,7 @@ function App() {
           setMatching={updateMatching}
         />
       ) : null}
+      <ToastContainer />
     </div>
   );
 }

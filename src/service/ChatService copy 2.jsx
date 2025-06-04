@@ -18,7 +18,6 @@ export const ChatService = () => {
       heartbeatIncoming: 4000,
       heartbeatOutgoing: 4000,
       onConnect: () => {
-        alert("소켓 연결 성공 !!!!!!!!!!");
         setConnected(true);
 
         client.current.subsribe(`${PLAY_CHANNEL}`, (msg) => {

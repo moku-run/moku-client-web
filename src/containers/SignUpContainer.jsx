@@ -5,6 +5,7 @@ import UnderBarLink from "../components/UnderBarLink";
 import UnderBarInput from "../components/UnderBarInput";
 import { useState } from "react";
 import { post } from "../service/FetchService";
+import { toast } from "react-toastify";
 
 const SignUpDTO = {
   loginId: "",
@@ -77,7 +78,7 @@ const SignUpContainer = ({ matchSubmit, link }) => {
               const result = await post("/users", signUpDTO);
               console.log(`result: ${result.success}`);
               if (result.success) {
-                alert("회원가입을 축하드립니다!\n바로 로그인하세요!");
+                toast.success("회원가입을 축하드립니다!\n바로 로그인하세요!");
                 link();
               }
             }}

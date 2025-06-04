@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import "../styles/MatchingContainer.css";
 import { useUserStore } from "../hooks/userStore";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const PlayBoardContainer = () => {
   const client = useUserStore((state) => state.client);
@@ -23,11 +24,9 @@ const PlayBoardContainer = () => {
 
     if (!roomId) {
       setClient(null);
-      client.deactivate(() => {
-        console.log("종료");
-      });
+      client.deactivate(() => {});
 
-      alert("종료된 방입니다.");
+      toast.warn("종료된 방입니다.");
       window.location.href = "/";
     }
 
@@ -51,15 +50,12 @@ const PlayBoardContainer = () => {
           const id = localStorage.getItem("id");
 
           if (response.player === id) {
-            console.log(`${id}!!!!!!!!!!!!!!!!! 승 리 !!!!!!!!!!!!!!!!`);
-            alert(`!!!!!!!!!!!!!!!!! 승 리 !!!!!!!!!!!!!!!!`);
+            toast.success("승리했습니다.");
           } else {
-            alert(`!!!!!!!!!!!!!!!!! 패 배 !!!!!!!!!!!!!!!!`);
+            toast.success("패배했습니다.");
           }
 
-          client.deactivate(() => {
-            console.log("종료");
-          });
+          client.deactivate(() => {});
 
           localStorage.removeItem("roomId");
           localStorage.removeItem("id");
@@ -72,7 +68,6 @@ const PlayBoardContainer = () => {
 
     client.subscribe("/user/queue/errors", (message) => {
       const msg = JSON.parse(message.body);
-      alert(msg.message);
     });
 
     return () => subscription.unsubscribe();
