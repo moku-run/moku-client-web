@@ -1,6 +1,6 @@
 import { Client } from "@stomp/stompjs";
 import SockJS from "sockjs-client";
-import { HTTP_API, WS_API, PLAY_CHANNEL, CHAT_CHANNEL } from "./service/Api";
+import { HTTP_API, PLAY_CHANNEL, CHAT_CHANNEL } from "./service/Api";
 import { useRef } from "react";
 
 function OnClient() {

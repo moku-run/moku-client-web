@@ -38,9 +38,6 @@ const PlayBoardContainer = () => {
 
       const response = JSON.parse(chat.content);
 
-      console.log(`RESULT : ${response.result}`);
-      console.log(`BOARD : ${response.board}`);
-
       setMoku(response.board);
       // if (response.result === "VICTORY") {
       //   resultRef.current = true;
@@ -52,7 +49,7 @@ const PlayBoardContainer = () => {
           if (response.player === id) {
             toast.success("승리했습니다.");
           } else {
-            toast.success("패배했습니다.");
+            toast.error("패배했습니다.");
           }
 
           client.deactivate(() => {});
@@ -61,16 +58,25 @@ const PlayBoardContainer = () => {
           localStorage.removeItem("id");
           localStorage.removeItem("stone");
 
-          window.location.href = "/";
+          setTimeout(() => {
+            window.location.href = "/";
+          }, 3000);
         }, 300);
       }
     });
 
-    client.subscribe("/user/queue/errors", (message) => {
-      const msg = JSON.parse(message.body);
-    });
+    const errorSubscription = client.subscribe(
+      "/user/queue/errors",
+      (message) => {
+        const msg = JSON.parse(message.body);
+        toast.warn(msg.message);
+      }
+    );
 
-    return () => subscription.unsubscribe();
+    return () => {
+      subscription.unsubscribe();
+      errorSubscription.unsubscribe();
+    };
   }, [client]);
 
   // useEffect(() => {
@@ -85,8 +91,6 @@ const PlayBoardContainer = () => {
 
   const onClickMoku = (row, col) => {
     if (moku[row][col] !== null) return;
-
-    console.log(`ROW: ${row}, COL: ${col}`);
 
     client.publish({
       destination: `/app/room.${localStorage.getItem("roomId")}`,
