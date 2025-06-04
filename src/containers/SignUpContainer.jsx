@@ -8,18 +8,18 @@ import { post } from "../service/FetchService";
 import { toast } from "react-toastify";
 
 const SignUpDTO = {
-  loginId: "",
+  login_id: "",
   nickname: "",
   password: "",
-  passwordConfirm: "",
+  password_confirm: "",
 };
 
 const SignUpContainer = ({ matchSubmit, link }) => {
   const [signUpDTO, setSignUpDTO] = useState({
-    loginId: "",
+    login_id: "",
     nickname: "",
     password: "",
-    passwordConfirm: "",
+    password_confirm: "",
   });
 
   const handleChange = (name, value) => {
@@ -27,8 +27,6 @@ const SignUpContainer = ({ matchSubmit, link }) => {
       ...prev,
       [name]: value,
     }));
-
-    console.log(`${name} ${value}`);
   };
 
   return (
@@ -40,7 +38,7 @@ const SignUpContainer = ({ matchSubmit, link }) => {
         </div>
         <div className="inputWrapper">
           <UnderBarInput
-            name="loginId"
+            name="login_id"
             title="아이디"
             placeHolder="로그인 아이디를 입력해주세요."
             variant="PRIMARY_INPUT"
@@ -55,7 +53,7 @@ const SignUpContainer = ({ matchSubmit, link }) => {
             event={handleChange}
           />
           <UnderBarInput
-            name="passwordConfirm"
+            name="password_confirm"
             type="password"
             title="비밀번호 재확인"
             placeHolder="비밀번호를 한 번 더 입력해주세요."
@@ -76,7 +74,7 @@ const SignUpContainer = ({ matchSubmit, link }) => {
             variant="PRIMARY_BUTTON"
             event={async () => {
               const result = await post("/users", signUpDTO);
-              console.log(`result: ${result.success}`);
+
               if (result.success) {
                 toast.success("회원가입을 축하드립니다!\n바로 로그인하세요!");
                 link();
