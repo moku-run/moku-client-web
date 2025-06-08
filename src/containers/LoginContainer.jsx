@@ -37,6 +37,8 @@ const LoginContainer = ({ matchSubmit, link, loginSubmit }) => {
     if (result.success) {
       const result = await get("/users");
 
+      console.log(result);
+
       const nickname = result.data.payload.nickname;
       const loginId = result.data.payload.login_id;
 

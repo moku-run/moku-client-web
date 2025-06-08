@@ -3,7 +3,7 @@ import "../styles/StatusContainer.css";
 import Button from "../components/Button";
 import CustomActiveShapePieChart from "../components/CustomActiveShapePieChart";
 import { useEffect, useState } from "react";
-import { post, get } from "../service/FetchService";
+import { get } from "../service/FetchService";
 import { useUserStore } from "../hooks/userStore";
 
 const StatusContainer = ({ matchSubmit, logoutSubmit }) => {
@@ -34,7 +34,7 @@ const StatusContainer = ({ matchSubmit, logoutSubmit }) => {
           {records && <CustomActiveShapePieChart data={records} />}
         </div>
         {records && (
-          <div className="score">{`${records.totalCount}전 ${records.winCount}승 ${records.loseCount}패`}</div>
+          <div className="score">{`${records.total_count}전 ${records.win_count}승 ${records.lose_count}패`}</div>
         )}
       </div>
       <div className="buttonWrapper">
