@@ -1,25 +1,40 @@
-import "../styles/StatusContainer.css";
+import "../styles/StatsContainer.css";
 
 import Button from "../components/Button";
 import CustomActiveShapePieChart from "../components/CustomActiveShapePieChart";
 import { useEffect, useState } from "react";
-import { get } from "../service/FetchService";
+import { get, post } from "../service/FetchService";
 import { useUserStore } from "../hooks/userStore";
+import { useNavigate } from "react-router-dom";
 
-const StatusContainer = ({ matchSubmit, logoutSubmit }) => {
+const StatsContainer = ({ matchSubmit, logoutSubmit }) => {
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
   const [records, setRecords] = useState(null);
-
   const { nickname, loginId } = useUserStore();
 
-  useEffect(() => {
-    const getRecords = async () => {
-      const response = await get("/records");
+  const submitLogout = async () => {
+    const response = await post("/logout");
 
-      setRecords(response.data.payload);
-    };
+    navigate("/");
+  };
+
+  const getRecords = async () => {
+    const response = await get("/stats");
+
+    if (!response.success) {
+      navigate("/");
+    }
+
+    setRecords(response.data.payload);
+    setLoading(false);
+  };
+
+  useEffect(() => {
     getRecords();
   }, []);
 
+  if (loading) return null;
   return (
     <div className="statusContainer">
       <div className="statusWrapper">
@@ -43,10 +58,10 @@ const StatusContainer = ({ matchSubmit, logoutSubmit }) => {
           event={matchSubmit}
           variant={"PRIMARY_BUTTON"}
         />
-        <Button name="로그아웃" event={logoutSubmit} variant={"DARK_BUTTON"} />
+        <Button name="로그아웃" event={submitLogout} variant={"DARK_BUTTON"} />
       </div>
     </div>
   );
 };
 
-export default StatusContainer;
+export default StatsContainer;

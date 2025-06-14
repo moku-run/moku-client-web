@@ -2,13 +2,37 @@ import "../styles/LoginContainer.css";
 import Button from "../components/Button";
 import UnderBarLink from "../components/UnderBarLink";
 import UnderBarInput from "../components/UnderBarInput";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SignUpContainer from "./SignUpContainer";
 import { get, post } from "../service/FetchService";
 import { useUserStore } from "../hooks/userStore";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const LoginContainer = ({ matchSubmit, link, loginSubmit }) => {
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+
+  const fetchUserDetails = async () => {
+    try {
+      const result = await get("/users/details");
+
+      if (result.success) {
+        const nickname = result.data.payload.nickname;
+        const loginId = result.data.payload.login_id;
+        setUser({ nickname, login_id: loginId });
+
+        navigate("/stats");
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchUserDetails();
+  }, []);
+
   const [loginDTO, setLoginDTO] = useState({
     login_id: "",
     password: "",
@@ -35,22 +59,14 @@ const LoginContainer = ({ matchSubmit, link, loginSubmit }) => {
     const result = await post("/login", loginDTO);
 
     if (result.success) {
-      const result = await get("/users");
-
-      console.log(result);
-
-      const nickname = result.data.payload.nickname;
-      const loginId = result.data.payload.login_id;
-
-      setUser({ nickname: nickname, login_id: loginId });
-
+      fetchUserDetails();
       toast.success("로그인에 성공했습니다.");
-      loginSubmit();
     }
   };
 
   const { setUser } = useUserStore();
 
+  if (loading) return null;
   return (
     <div className="loginContainer">
       <div className="loginWrapper">
