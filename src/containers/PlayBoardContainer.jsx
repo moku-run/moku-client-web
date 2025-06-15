@@ -7,14 +7,10 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const PlayBoardContainer = () => {
-  const [nextPlayer, setNextPlayer] = useState(null);
-  const [lastPlayer, setLastPlayer] = useState(null);
   const [lastStone, setLastStone] = useState({ lastRow: null, lastCol: null });
 
   const client = useUserStore((state) => state.client);
   const setClient = useUserStore((state) => state.setClient);
-
-  const resultRef = useRef(false);
 
   const [moku, setMoku] = useState(
     Array(15)
@@ -32,7 +28,7 @@ const PlayBoardContainer = () => {
       toast.warn("종료된 방입니다.");
       window.location.href = "/";
     }
-
+    
     const subscription = client.subscribe(`/topic/room.${roomId}`, (msg) => {
       const chat = JSON.parse(msg.body);
       if (chat.type !== "PLAY") {
@@ -42,14 +38,7 @@ const PlayBoardContainer = () => {
       const response = JSON.parse(chat.content);
 
       setLastStone({ lastRow: response.last_row, lastCol: response.last_col });
-      setNextPlayer(response.next_player);
-      setLastPlayer(response.last_player);
-
       setMoku(response.board);
-
-      // if (response.result === "VICTORY") {
-      //   resultRef.current = true;
-      // }
 
       if (response.result === "VICTORY") {
         setTimeout(() => {
@@ -87,14 +76,6 @@ const PlayBoardContainer = () => {
       errorSubscription.unsubscribe();
     };
   }, [client]);
-
-  // useEffect(() => {
-  //   console.log("???");
-  //   if (resultRef.current) {
-  //     console.log("종료!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-  //     resultRef.current = false;
-  //   }
-  // }, []);
 
   useEffect(() => {}, [moku]);
 

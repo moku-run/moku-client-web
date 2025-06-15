@@ -2,7 +2,7 @@ import "../styles/MatchPlayerCard.css";
 import Stone from "./Stone";
 import player from "../assets/emoji/player.svg";
 
-const MatchPlayerCard = ({ turn = true, stoneColor }) => {
+const MatchPlayerCard = ({ turn, stoneColor }) => {
   return (
     <div className="matchPlayerCard">
       <div className={`turnWrapper`}>
