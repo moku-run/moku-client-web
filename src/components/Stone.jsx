@@ -1,7 +1,11 @@
 import "../styles/Stone.css";
 
-const Stone = ({ variant }) => {
-  return <div className={`stone ${variant}`}></div>;
+const Stone = ({ variant, last }) => {
+  return (
+    <div className={`stone ${variant}`}>
+      <div className={`${last ? "current" : ""}`}></div>
+    </div>
+  );
 };
 
 export default Stone;
