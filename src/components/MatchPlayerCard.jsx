@@ -7,7 +7,7 @@ const MatchPlayerCard = ({ turn = true, stoneColor }) => {
     <div className="matchPlayerCard">
       <div className={`turnWrapper`}>
         <Stone variant={stoneColor} />
-        <div className={`${turn ? "matchTurn" : ""}`}>02:24</div>
+        <div className={`${turn ? "matchTurn" : ""}`}>20s</div>
       </div>
       <div className={`playerImgWrapper ${turn ? "" : "notMatchTurnImg"}`}>
         <img src={player} className={`playerImg `} />

@@ -1,5 +1,6 @@
 import MatchPlayerCard from "../components/MatchPlayerCard";
 import "../styles/MatchUpContainer.css";
+import { fetchUserDetailsService } from "./service/fetchUserDetailsService";
 
 const MatchUpContainer = () => {
   return (

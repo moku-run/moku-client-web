@@ -7,10 +7,13 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const PlayBoardContainer = () => {
+  const [nextPlayer, setNextPlayer] = useState(null);
+  const [lastPlayer, setLastPlayer] = useState(null);
+  const [lastStone, setLastStone] = useState({ lastRow: null, lastCol: null });
+
   const client = useUserStore((state) => state.client);
   const setClient = useUserStore((state) => state.setClient);
 
-  const [resultFlag, setResultFlag] = useState(false);
   const resultRef = useRef(false);
 
   const [moku, setMoku] = useState(
@@ -38,10 +41,16 @@ const PlayBoardContainer = () => {
 
       const response = JSON.parse(chat.content);
 
+      setLastStone({ lastRow: response.last_row, lastCol: response.last_col });
+      setNextPlayer(response.next_player);
+      setLastPlayer(response.last_player);
+
       setMoku(response.board);
+
       // if (response.result === "VICTORY") {
       //   resultRef.current = true;
       // }
+
       if (response.result === "VICTORY") {
         setTimeout(() => {
           const id = localStorage.getItem("id");
@@ -117,7 +126,15 @@ const PlayBoardContainer = () => {
                     moku[row][col] === null ? "playBoardBack_cell_point" : ""
                   }
                 >
-                  {moku[row][col] && <Stone variant={moku[row][col]} />}
+                  {moku[row][col] && (
+                    <Stone
+                      variant={moku[row][col]}
+                      last={
+                        Number(lastStone.lastRow) === row &&
+                        Number(lastStone.lastCol) === col
+                      }
+                    />
+                  )}
                 </div>
               </div>
             ))

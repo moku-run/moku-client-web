@@ -1,11 +1,6 @@
 import React, { PureComponent } from "react";
 import { PieChart, Pie, Sector, ResponsiveContainer } from "recharts";
 
-// const data = [
-//   { name: "승리", value: 52 },
-//   { name: "패배", value: 32 },
-// ];
-
 const renderActiveShape = (props) => {
   const RADIAN = Math.PI / 180;
   const {
@@ -91,10 +86,16 @@ export default class CustomActiveShapePieChart extends PureComponent {
   };
 
   render() {
-    const data = [
-      { name: "승리", value: this.props.data.winCount },
-      { name: "패배", value: this.props.data.loseCount },
-    ];
+    const { win_count = 0, lose_count = 0 } = this.props.data || {};
+    const total = win_count + lose_count;
+
+    const data =
+      total === 0
+        ? [{ name: "No Data", value: 1 }]
+        : [
+            { name: "승리", value: win_count },
+            { name: "패배", value: lose_count },
+          ];
 
     return (
       <ResponsiveContainer width="100%" height="100%">
@@ -107,9 +108,11 @@ export default class CustomActiveShapePieChart extends PureComponent {
             cy="50%"
             innerRadius={60}
             outerRadius={80}
-            fill="#001661"
+            // fill="#001661"
+            fill={total === 0 ? "#ddd" : "#001661"}
             dataKey="value"
-            onMouseEnter={this.onPieEnter}
+            onMouseEnter={total === 0 ? undefined : this.onPieEnter}
+            // onMouseEnter={this.onPieEnter}
           />
         </PieChart>
       </ResponsiveContainer>

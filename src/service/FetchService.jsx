@@ -27,19 +27,19 @@ export const post = async (endPoint, dto) => {
   } catch (error) {
     const res = error.response.data;
 
-    if (res.code === "CC001") {
-      console.log(res.payload[0]);
+    if (res.code === "CR001") {
       toast.warn(res.payload[0].message);
     }
 
-    if (res.code === "CC002") console.log(`CC002 ${res.payload[0]}`);
+    if (res.code === "CR002") {
+      toast.warn(res.payload[0].message);
+    }
 
-    if (res.code === "CC003") {
-      console.log(`CC003 ${res.payload}`);
+    if (res.code === "CR003") {
       toast.warn(res.payload.split("problem: ")[1]);
     }
 
-    if (res.code === "CC004") console.log(`CC004 ${res.payload[0]}`);
+    if (res.code === "CR004") console.log(`CR004 ${res.payload[0]}`);
 
     if (res.code === "SC001") {
       toast.warn(res.message);

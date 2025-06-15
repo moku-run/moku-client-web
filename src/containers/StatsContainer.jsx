@@ -7,7 +7,11 @@ import { get, post } from "../service/FetchService";
 import { useUserStore } from "../hooks/userStore";
 import { useNavigate } from "react-router-dom";
 
-const StatsContainer = ({ matchSubmit, logoutSubmit }) => {
+import { loadingGuardService } from "./service/loadingGuardService";
+import { useMatchingContainerStore } from "./store/useMatchingContainerStore";
+
+const StatsContainer = () => {
+  const { open } = useMatchingContainerStore();
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const [records, setRecords] = useState(null);
@@ -34,8 +38,8 @@ const StatsContainer = ({ matchSubmit, logoutSubmit }) => {
     getRecords();
   }, []);
 
-  if (loading) return null;
-  return (
+  return loadingGuardService(
+    loading,
     <div className="statusContainer">
       <div className="statusWrapper">
         <div className="titleWrapper">
@@ -55,7 +59,9 @@ const StatsContainer = ({ matchSubmit, logoutSubmit }) => {
       <div className="buttonWrapper">
         <Button
           name="시작하기"
-          event={matchSubmit}
+          event={() => {
+            open();
+          }}
           variant={"PRIMARY_BUTTON"}
         />
         <Button name="로그아웃" event={submitLogout} variant={"DARK_BUTTON"} />

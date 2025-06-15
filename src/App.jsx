@@ -1,58 +1,39 @@
-import { useState } from "react";
 import "./App.css";
-import ContentContainer from "./components/ContentContainer";
-import MatchingContainer from "./containers/MatchingContainer";
-import MokuPage from "./pages/MokuPage";
+import LandingPage from "./pages/LandingPage";
+import StatsPage from "./pages/StatsPage";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
-const MATCH_STATE = {
-  READY: "READY",
-  PLAY: "PLAY",
-};
-
-const MATCH_JOIN = {
-  NONE: "NONE",
-  READY: "READY",
-};
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+import SignUpPage from "./pages/SignUpPage";
+import MatchingContainer from "./containers/MatchingContainer";
+import MokuPage from "./pages/MokuPage";
 
 function App() {
-  const [matching, setMatching] = useState(MATCH_STATE.READY);
-  const [join, setJoin] = useState(MATCH_JOIN.NONE);
-
-  const cancelMatchJoin = () => {
-    setJoin(MATCH_JOIN.NONE);
-  };
-
-  const matchJoin = () => {
-    setJoin(MATCH_JOIN.READY);
-  };
-
-  const updateJoin = (result) => {
-    setJoin(result ? MATCH_JOIN.NONE : MATCH_JOIN.READY);
-  };
-
-  const updateMatching = (result) => {
-    setMatching(result ? MATCH_STATE.PLAY : MATCH_STATE.READY);
-  };
-
   return (
-    <div className="App">
-      {matching === `${MATCH_STATE.READY}` ? (
-        <ContentContainer matchSubmit={matchJoin} />
-      ) : (
-        <MokuPage />
-      )}
+    <Router>
+      <div className="App">
+        <Routes>
+          <Route path="/hi" element={<MatchingContainer />}></Route>
+          <Route path="/" element={<LandingPage />}></Route>
+          <Route path="/stats" element={<StatsPage />}></Route>
+          <Route path="/sign-up" element={<SignUpPage />}></Route>
+          <Route path="/play-moku" element={<MokuPage />}></Route>
+        </Routes>
 
-      {join === `${MATCH_JOIN.READY}` ? (
-        <MatchingContainer
-          cancle={cancelMatchJoin}
-          setJoin={updateJoin}
-          setMatching={updateMatching}
+        <MatchingContainer />
+        <ToastContainer
+          autoClose={2000}
+          pauseOnHover
+          newestOnTop={true}
+          closeOnClick
         />
-      ) : null}
-      <ToastContainer />
-    </div>
+      </div>
+    </Router>
   );
 }
 

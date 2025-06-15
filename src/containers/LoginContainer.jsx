@@ -1,36 +1,26 @@
 import "../styles/LoginContainer.css";
+
 import Button from "../components/Button";
 import UnderBarLink from "../components/UnderBarLink";
 import UnderBarInput from "../components/UnderBarInput";
 import { useEffect, useState } from "react";
-import SignUpContainer from "./SignUpContainer";
-import { get, post } from "../service/FetchService";
+import { post } from "../service/FetchService";
 import { useUserStore } from "../hooks/userStore";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
-const LoginContainer = ({ matchSubmit, link, loginSubmit }) => {
+import { fetchUserDetailsService } from "./service/fetchUserDetailsService";
+import { loadingGuardService } from "./service/loadingGuardService";
+import { useMatchingContainerStore } from "./store/useMatchingContainerStore";
+
+const LoginContainer = () => {
+  const { open } = useMatchingContainerStore();
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-
-  const fetchUserDetails = async () => {
-    try {
-      const result = await get("/users/details");
-
-      if (result.success) {
-        const nickname = result.data.payload.nickname;
-        const loginId = result.data.payload.login_id;
-        setUser({ nickname, login_id: loginId });
-
-        navigate("/stats");
-      }
-    } finally {
-      setLoading(false);
-    }
-  };
+  const { setUser } = useUserStore();
 
   useEffect(() => {
-    fetchUserDetails();
+    fetchUserDetailsService({ setUser, navigate, setLoading });
   }, []);
 
   const [loginDTO, setLoginDTO] = useState({
@@ -45,7 +35,7 @@ const LoginContainer = ({ matchSubmit, link, loginSubmit }) => {
     }));
   };
 
-  const loginSubmit2 = async () => {
+  const loginSubmit = async () => {
     if (loginDTO.login_id === "") {
       toast.error("아이디는 필수입니다.");
       return;
@@ -59,15 +49,14 @@ const LoginContainer = ({ matchSubmit, link, loginSubmit }) => {
     const result = await post("/login", loginDTO);
 
     if (result.success) {
-      fetchUserDetails();
+      fetchUserDetailsService(setUser, navigate, setLoading);
       toast.success("로그인에 성공했습니다.");
+      navigate("/stats");
     }
   };
 
-  const { setUser } = useUserStore();
-
-  if (loading) return null;
-  return (
+  return loadingGuardService(
+    loading,
     <div className="loginContainer">
       <div className="loginWrapper">
         <div className="titleWrapper">
@@ -82,7 +71,7 @@ const LoginContainer = ({ matchSubmit, link, loginSubmit }) => {
             placeHolder="아이디를 입력해주세요."
             variant="PRIMARY_INPUT"
             event={onChange}
-            submit={loginSubmit2}
+            submit={loginSubmit}
           />
           <UnderBarInput
             name="password"
@@ -91,18 +80,22 @@ const LoginContainer = ({ matchSubmit, link, loginSubmit }) => {
             placeHolder="비밀번호를 입력해주세요."
             variant="PRIMARY_INPUT"
             event={onChange}
-            submit={loginSubmit2}
+            submit={loginSubmit}
           />
         </div>
         <div className="buttonWrapper">
-          <Button name="로그인" variant="PRIMARY_BUTTON" event={loginSubmit2} />
+          <Button name="로그인" variant="PRIMARY_BUTTON" event={loginSubmit} />
           <Button
-            event={matchSubmit}
+            event={() => {
+              open();
+            }}
             name="로그인없이 시작하기"
             variant="DARK_BUTTON"
           />
           <UnderBarLink
-            link={link}
+            link={() => {
+              navigate("/sign-up");
+            }}
             title="회원가입을 하면 전적을 관리할 수 있어요."
             variant="PRIMARY_LINK"
           />

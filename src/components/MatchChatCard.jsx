@@ -3,18 +3,6 @@ import ChatBubble from "./ChatBubble";
 import { useEffect, useRef, useState } from "react";
 import { useUserStore } from "../hooks/userStore";
 
-const chatDTO = {
-  textType: "MESSAGE",
-  message: "hihi",
-};
-
-const textDTOList = [
-  {
-    message: "hihi",
-    type: "SEND",
-  },
-];
-
 const MatchChatCard = () => {
   const client = useUserStore((state) => state.client);
   const [inputChat, setInputChat] = useState("");
