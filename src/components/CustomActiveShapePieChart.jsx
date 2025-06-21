@@ -87,14 +87,16 @@ export default class CustomActiveShapePieChart extends PureComponent {
 
   render() {
     const { win_count = 0, lose_count = 0 } = this.props.data || {};
-    const total = win_count + lose_count;
+    const total = +win_count + +lose_count;
+    const winCount = Number(win_count);
+    const loseCount = Number(lose_count);
 
     const data =
       total === 0
         ? [{ name: "No Data", value: 1 }]
         : [
-            { name: "승리", value: win_count },
-            { name: "패배", value: lose_count },
+            { name: "승리", value: winCount },
+            { name: "패배", value: loseCount },
           ];
 
     return (

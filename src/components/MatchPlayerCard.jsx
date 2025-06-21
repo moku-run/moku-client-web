@@ -1,13 +1,44 @@
 import "../styles/MatchPlayerCard.css";
 import Stone from "./Stone";
 import player from "../assets/emoji/player.svg";
+import { useEffect, useState } from "react";
+import { get } from "../service/FetchService";
 
 const MatchPlayerCard = ({ turn, stoneColor }) => {
+  useEffect(() => {
+    getRoomInformation();
+  }, []);
+
+  const getRoomInformation = async () => {
+    const response = await get(
+      "/moku/" + localStorage.getItem("roomId") + "/details"
+    );
+    console.log(response);
+  };
+
+  const [timer, setTimer] = useState(20);
+  useEffect(() => {
+    if (!turn) return;
+    setTimer(20);
+
+    const timerAction = setInterval(() => {
+      setTimer((prev) => {
+        if (prev <= 1) {
+          clearInterval(timer);
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(timerAction);
+  }, [turn]);
+
   return (
     <div className="matchPlayerCard">
       <div className={`turnWrapper`}>
         <Stone variant={stoneColor} />
-        <div className={`${turn ? "matchTurn" : ""}`}>20s</div>
+        <div className={`${turn ? "matchTurn" : ""}`}>{timer}s</div>
       </div>
       <div className={`playerImgWrapper ${turn ? "" : "notMatchTurnImg"}`}>
         <img src={player} className={`playerImg `} />

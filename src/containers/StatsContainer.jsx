@@ -25,7 +25,6 @@ const StatsContainer = () => {
 
   const getRecords = async () => {
     const response = await get("/stats");
-
     if (!response.success) {
       navigate("/");
     }

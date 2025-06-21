@@ -28,6 +28,10 @@ const LoginContainer = () => {
     password: "",
   });
 
+  const createAuth = async () => {
+    const response = await post("/auth");
+  };
+
   const onChange = (name, value) => {
     setLoginDTO((prev) => ({
       ...prev,
